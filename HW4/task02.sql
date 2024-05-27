@@ -8,4 +8,4 @@ END,
 COUNT(*) AS likes FROM likes l
 JOIN profiles p ON p.user_id = l.user_id
 GROUP BY p.gender
-ORDER BY likes DESC ;
+ORDER BY likes DESC;
