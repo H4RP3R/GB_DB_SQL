@@ -62,3 +62,24 @@ WHERE status = 'approved';
 
 SELECT * FROM tmp_friends;
 
+-- общее табличное выражение
+WITH friends AS
+(SELECT initiator_user_id AS user_id, target_user_id AS friend_id
+FROM lesson_4.friend_requests
+WHERE status = 'approved'
+UNION
+SELECT target_user_id, initiator_user_id from lesson_4.friend_requests
+WHERE status = 'approved')
+SELECT friend_id FROM friends
+WHERE user_id=1;
+
+-- представления
+ CREATE OR REPLACE VIEW v_friends AS
+ (SELECT initiator_user_id AS user_id, target_user_id AS friend_id
+ FROM lesson_4.friend_requests
+ WHERE status = 'approved'
+ UNION
+ SELECT target_user_id, initiator_user_id FROM lesson_4.friend_requests
+ WHERE status = 'approved');
+
+SELECT friend_id FROM v_friends WHERE user_id = 1;
